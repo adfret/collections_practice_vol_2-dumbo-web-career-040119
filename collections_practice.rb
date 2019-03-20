@@ -91,16 +91,30 @@ end
 
 
 def merge_data(keys, data)
-
-keys.merge!(data)
-
+  keys.each do |name_hash|
+    data.each do |hash|
+      name_hash.merge!(hash[name_hash[:first_name]])
+    end
+  end
 end
 
-
-def organized_schools(schools)
-  schools.sort_by{|i|i}
+def find_cool(array)
+  array.select {|entry| entry if entry.has_value?("cool")}
 end
 
+def organize_schools(schools)
+  by_location = {}
+    schools.each do |school, location_hash|
+      location_hash.each do |symbol, location|
+        if by_location[location] == nil
+          by_location[location] = [school]
+        else
+          by_location[location] << school
+        end
+      end
+    end
+    by_location
+end
 
 def find_cool(cool)
   i,t = 0, []
