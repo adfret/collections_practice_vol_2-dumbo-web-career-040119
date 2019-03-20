@@ -24,7 +24,7 @@ end
 
 
 def remove_non_strings(arr)
-
+b,c = [],[]
 arr.each do |i|
   if i.to_s != i
     b << i
@@ -40,6 +40,51 @@ end
 
 def count_elements(arr)
 
+  aff, zrt = [], []
+  arr.each do |i|
+  aff << i.values
+  end
+
+  aff = aff.sort_by{|i| i}.reverse!
+  att = aff.flatten!
+
+    i, b = 0, []
+    while i < aff.length
+    b << aff.count(aff[i])
+    i+=1
+    end
+
+  b = b.uniq!
+
+
+  arv =[]
+  y = 0
+        while y < b.length
+        arv << [:count, b[y]]
+        y+=1
+  end
+
+  att = att.uniq!
+  k = []
+  i = 0
+  while i < att.length
+  k << [:name, att[i]]
+  i+=1
+  end
+
+  k
+  arv
+  t = []
+  i=0
+  while i < arv.length
+  t << [arv[i], k[i]]
+  i+=1
+  end
+  f=[]
+  t.each do |i|
+  f << i.to_h
+  end
+  f
 
 end
 
@@ -53,15 +98,17 @@ end
 
 
 def organized_schools(schools)
-
   schools.sort_by{|i|i}
 end
 
 
 def find_cool(cool)
-  b = ""
-  cool.each do |i|
-    b = i.values
+  i,t = 0, []
+  while i < cool.length
+      if cool[i].values.include?("cool")
+      t << cool[i]
+      end
+    i+=1
   end
-
+  t
 end
